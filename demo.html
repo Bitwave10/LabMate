@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabMate - 실험실 관리 시스템</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .sidebar-gradient {
+            background: linear-gradient(135deg, #2C3E1F 0%, #3A4D2A 100%);
+        }
+        
+        .logo-gradient {
+            background: linear-gradient(135deg, #C8FF6B 0%, #B8D99C 100%);
+        }
+        
+        .menu-item-active {
+            background-color: #4A6A22;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .menu-item-inactive {
+            background-color: #B8D99C;
+            color: #2C4A0F;
+            font-weight: 600;
+        }
+        
+        .menu-item-inactive:hover {
+            background-color: #A8C98C;
+            color: #2C4A0F;
+        }
+        
+        .stat-card-gradient-1 {
+            background: linear-gradient(135deg, #4A6A22 0%, #3C5A1F 100%);
+        }
+        
+        .stat-card-gradient-2 {
+            background: linear-gradient(135deg, #DC851F 0%, #C8780E 100%);
+        }
+        
+        .stat-card-gradient-3 {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+        }
+        
+        .stat-card-gradient-4 {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+    </style>
+</head>
+<body class="bg-[#F5F5F0]">
+    <div class="min-h-screen flex w-full">
+        <!-- Sidebar -->
+        <div class="w-64 bg-[#2C3E1F] shadow-2xl flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="border-b border-[#4A6A22] p-4 md:p-6 sidebar-gradient">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 md:w-12 md:h-12 logo-gradient rounded-xl flex items-center justify-center shadow-xl flex-shrink-0">
+                        <svg class="w-6 h-6 md:w-7 md:h-7 text-[#2C4A0F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="font-black text-xl md:text-2xl text-white tracking-tight drop-shadow-lg">LabMate</h2>
+                        <p class="text-sm text-[#C8FF6B] font-bold drop-shadow-md">실험실 관리 시스템</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar Content -->
+            <div class="p-2 md:p-3 flex-1">
+                <div class="space-y-1">
+                    <!-- Dashboard Menu Item (Active) -->
+                    <div class="menu-item-active transition-all duration-200 rounded-xl mb-1 h-11 md:h-12 flex items-center gap-2 md:gap-3 px-3 md:px-4 shadow-lg">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z"></path>
+                        </svg>
+                        <span class="text-xs md:text-sm">대시보드</span>
+                    </div>
+                    
+                    <!-- Calendar Menu Item -->
+                    <div class="menu-item-inactive transition-all duration-200 rounded-xl mb-1 h-11 md:h-12 flex items-center gap-2 md:gap-3 px-3 md:px-4">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span class="text-xs md:text-sm">캘린더</span>
+                    </div>
+                    
+                    <!-- Protocols Menu Item -->
+                    <div class="menu-item-inactive transition-all duration-200 rounded-xl mb-1 h-11 md:h-12 flex items-center gap-2 md:gap-3 px-3 md:px-4">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span class="text-xs md:text-sm">프로토콜</span>
+                    </div>
+                    
+                    <!-- Reagents Menu Item -->
+                    <div class="menu-item-inactive transition-all duration-200 rounded-xl mb-1 h-11 md:h-12 flex items-center gap-2 md:gap-3 px-3 md:px-4">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                        <span class="text-xs md:text-sm">시약/소모품</span>
+                    </div>
+                    
+                    <!-- Cell Lines Menu Item -->
+                    <div class="menu-item-inactive transition-all duration-200 rounded-xl mb-1 h-11 md:h-12 flex items-center gap-2 md:gap-3 px-3 md:px-4">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <span class="text-xs md:text-sm">세포주</span>
+                    </div>
+                    
+                    <!-- Calculators Menu Item -->
+                    <div class="menu-item-inactive transition-all duration-200 rounded-xl mb-1 h-11 md:h-12 flex items-center gap-2 md:gap-3 px-3 md:px-4">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        <span class="text-xs md:text-sm">실험 계산기</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden w-full min-w-0">
+            <!-- Header -->
+            <header class="bg-white/80 backdrop-blur-xl border-b border-slate-200/50 px-4 md:px-6 py-3 md:py-4 shadow-sm sticky top-0 z-10">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <button class="hover:bg-slate-100 p-2 rounded-xl transition-colors md:hidden">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <button class="hover:bg-slate-100 p-2 rounded-xl transition-colors hidden md:flex">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-lg md:text-xl font-bold text-[#2C3E1F]">LabMate</h1>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="flex-1 overflow-auto">
+                <div class="p-3 md:p-6 lg:p-8 space-y-6 md:space-y-8">
+                    <div class="max-w-7xl mx-auto">
+                        <!-- Page Header -->
+                        <div class="mb-6 md:mb-8">
+                            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#3C4A2F] mb-2 md:mb-3 tracking-tight">대시보드</h1>
+                            <p class="text-sm md:text-base lg:text-lg text-slate-600 font-medium">오늘의 실험실 현황을 한눈에 확인하세요</p>
+                        </div>
+
+                        <!-- Statistics Cards -->
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8">
+                            <!-- Today Schedule Card -->
+                            <div class="hover:shadow-2xl transition-all duration-300 border-0 bg-white rounded-xl md:rounded-2xl cursor-pointer group overflow-hidden relative">
+                                <div class="absolute inset-0 stat-card-gradient-1 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                                <div class="p-4 md:p-6">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-xs md:text-sm font-bold text-slate-500 mb-2 md:mb-3 uppercase tracking-wide">오늘 일정</p>
+                                            <p class="text-2xl md:text-4xl font-bold text-[#3C4A2F] truncate">2</p>
+                                        </div>
+                                        <div class="p-3 md:p-4 rounded-xl md:rounded-2xl stat-card-gradient-1 bg-opacity-10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg flex-shrink-0">
+                                            <svg class="w-6 h-6 md:w-8 md:h-8 text-[#4A6A22]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reagent Alert Card -->
+                            <div class="hover:shadow-2xl transition-all duration-300 border-0 bg-white rounded-xl md:rounded-2xl cursor-pointer group overflow-hidden relative">
+                                <div class="absolute inset-0 stat-card-gradient-2 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                                <div class="p-4 md:p-6">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-xs md:text-sm font-bold text-slate-500 mb-2 md:mb-3 uppercase tracking-wide">시약 알림</p>
+                                            <p class="text-2xl md:text-4xl font-bold text-[#3C4A2F] truncate">2</p>
+                                        </div>
+                                        <div class="p-3 md:p-4 rounded-xl md:rounded-2xl stat-card-gradient-2 bg-opacity-10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg flex-shrink-0">
+                                            <svg class="w-6 h-6 md:w-8 md:h-8 text-[#DC851F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cell Lines Card -->
+                            <div class="hover:shadow-2xl transition-all duration-300 border-0 bg-white rounded-xl md:rounded-2xl cursor-pointer group overflow-hidden relative">
+                                <div class="absolute inset-0 stat-card-gradient-3 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                                <div class="p-4 md:p-6">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-xs md:text-sm font-bold text-slate-500 mb-2 md:mb-3 uppercase tracking-wide">세포주</p>
+                                            <p class="text-2xl md:text-4xl font-bold text-[#3C4A2F] truncate">3</p>
+                                        </div>
+                                        <div class="p-3 md:p-4 rounded-xl md:rounded-2xl stat-card-gradient-3 bg-opacity-10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg flex-shrink-0">
+                                            <svg class="w-6 h-6 md:w-8 md:h-8 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Protocols Card -->
+                            <div class="hover:shadow-2xl transition-all duration-300 border-0 bg-white rounded-xl md:rounded-2xl cursor-pointer group overflow-hidden relative">
+                                <div class="absolute inset-0 stat-card-gradient-4 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                                <div class="p-4 md:p-6">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-xs md:text-sm font-bold text-slate-500 mb-2 md:mb-3 uppercase tracking-wide">프로토콜</p>
+                                            <p class="text-2xl md:text-4xl font-bold text-[#3C4A2F] truncate">3</p>
+                                        </div>
+                                        <div class="p-3 md:p-4 rounded-xl md:rounded-2xl stat-card-gradient-4 bg-opacity-10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg flex-shrink-0">
+                                            <svg class="w-6 h-6 md:w-8 md:h-8 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Cards -->
+                        <div class="grid lg:grid-cols-2 gap-4 md:gap-6">
+                            <!-- Today Schedule Card -->
+                            <div class="border-0 bg-white rounded-xl md:rounded-2xl shadow-xl overflow-hidden">
+                                <div class="border-b border-slate-100 p-4 md:pb-5 bg-gradient-to-r from-[#4A6A22]/5 to-transparent">
+                                    <div class="flex items-center gap-2 md:gap-3 text-lg md:text-xl font-bold text-[#3C4A2F]">
+                                        <div class="p-1.5 md:p-2 bg-[#B8D99C] rounded-lg md:rounded-xl">
+                                            <svg class="w-4 h-4 md:w-5 md:h-5 text-[#3C5A1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                        </div>
+                                        오늘 일정
+                                    </div>
+                                </div>
+                                <div class="p-4 md:p-6">
+                                    <div class="space-y-2 md:space-y-3">
+                                        <!-- Schedule Item 1 -->
+                                        <div class="p-3 md:p-5 bg-gradient-to-r from-[#F5F5F0] to-white rounded-xl md:rounded-2xl border-l-4 border-[#4A6A22] hover:shadow-md transition-all duration-200">
+                                            <div class="flex items-start justify-between gap-2">
+                                                <div class="flex-1 min-w-0">
+                                                    <h4 class="font-bold text-[#3C4A2F] text-base md:text-lg mb-1 truncate">PCR 실험</h4>
+                                                    <p class="text-xs md:text-sm text-slate-600 font-semibold flex items-center gap-1 md:gap-2">
+                                                        <svg class="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                        </svg>
+                                                        <span class="truncate">10:00 - 12:00</span>
+                                                    </p>
+                                                </div>
+                                                <span class="px-2 md:px-3 py-1 md:py-1.5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-wide flex-shrink-0 bg-[#8B5CF6]/10 text-[#8B5CF6]">
+                                                    실험
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Schedule Item 2 -->
+                                        <div class="p-3 md:p-5 bg-gradient-to-r from-[#F5F5F0] to-white rounded-xl md:rounded-2xl border-l-4 border-[#4A6A22] hover:shadow-md transition-all duration-200">
+                                            <div class="flex items-start justify-between gap-2">
+                                                <div class="flex-1 min-w-0">
+                                                    <h4 class="font-bold text-[#3C4A2F] text-base md:text-lg mb-1 truncate">팀 미팅</h4>
+                                                    <p class="text-xs md:text-sm text-slate-600 font-semibold flex items-center gap-1 md:gap-2">
+                                                        <svg class="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                        </svg>
+                                                        <span class="truncate">14:00 - 15:00</span>
+                                                    </p>
+                                                </div>
+                                                <span class="px-2 md:px-3 py-1 md:py-1.5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-wide flex-shrink-0 bg-[#3B82F6]/10 text-[#3B82F6]">
+                                                    미팅
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Alerts Card -->
+                            <div class="border-0 bg-white rounded-xl md:rounded-2xl shadow-xl overflow-hidden">
+                                <div class="border-b border-slate-100 p-4 md:pb-5 bg-gradient-to-r from-[#DC851F]/5 to-transparent">
+                                    <div class="flex items-center gap-2 md:gap-3 text-lg md:text-xl font-bold text-[#3C4A2F]">
+                                        <div class="p-1.5 md:p-2 bg-[#DC851F]/10 rounded-lg md:rounded-xl">
+                                            <svg class="w-4 h-4 md:w-5 md:h-5 text-[#DC851F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                        </div>
+                                        알림
+                                    </div>
+                                </div>
+                                <div class="p-4 md:p-6">
+                                    <div class="space-y-3 md:space-y-4">
+                                        <!-- Low Stock Alert -->
+                                        <div class="p-3 md:p-5 bg-gradient-to-r from-red-50 to-white rounded-xl md:rounded-2xl border-l-4 border-red-500">
+                                            <h4 class="font-bold text-red-800 mb-2 md:mb-3 text-base md:text-lg">재고 부족 (1)</h4>
+                                            <div class="space-y-1.5 md:space-y-2">
+                                                <div class="flex items-center gap-2 text-xs md:text-sm">
+                                                    <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full flex-shrink-0"></div>
+                                                    <p class="text-red-700 font-semibold truncate">Taq Polymerase - 0.5 ml</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Expiring Alert -->
+                                        <div class="p-3 md:p-5 bg-gradient-to-r from-orange-50 to-white rounded-xl md:rounded-2xl border-l-4 border-orange-500">
+                                            <h4 class="font-bold text-orange-800 mb-2 md:mb-3 text-base md:text-lg">유효기간 임박 (1)</h4>
+                                            <div class="space-y-1.5 md:space-y-2">
+                                                <div class="flex items-center gap-2 text-xs md:text-sm">
+                                                    <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-orange-500 rounded-full flex-shrink-0"></div>
+                                                    <p class="text-orange-700 font-semibold truncate">dNTP Mix - 2024-01-15</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple menu interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item-inactive, .menu-item-active');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    menuItems.forEach(mi => {
+                        mi.classList.remove('menu-item-active');
+                        mi.classList.add('menu-item-inactive');
+                    });
+                    
+                    // Add active class to clicked item
+                    this.classList.remove('menu-item-inactive');
+                    this.classList.add('menu-item-active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
